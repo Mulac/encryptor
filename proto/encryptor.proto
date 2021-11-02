@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+option go_package = "github.com/Mulac/encryptor";
+
+package encryptor;
+
+// The greeting service definition.
+service Encryptor {
+  // Sends a greeting
+  rpc Encrypt (EncryptorRequest) returns (Message) {}
+  rpc Decrypt (EncryptorRequest) returns (Message) {}
+}
+
+// The request message containing the user's name.
+message Message {
+  string body = 1;
+}
+
+// The response message containing the greetings
+message EncryptorRequest {
+  Message message = 1;
+  int32  key  = 2;
+}
