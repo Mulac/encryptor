@@ -18,6 +18,7 @@ type caesarCipher struct {
 func (e caesarCipher) Encrypt(message string, opts ...EncryptorOption) (encrypted string, err error) {
 	e.apply(opts) // Grab our key
 	if e.key%26 == 0 {
+		// Rotation factor is 0, error is of type ErrKey
 		err = fmt.Errorf("ERROR|caesarEncryptor.Encrypt(%s)|key is %d|no enciphering has taken place|%w", message, e.key, ErrKey)
 	}
 
@@ -33,6 +34,7 @@ func (e caesarCipher) Encrypt(message string, opts ...EncryptorOption) (encrypte
 func (e caesarCipher) Decrypt(message string, opts ...EncryptorOption) (decrypted string, err error) {
 	e.apply(opts) // Grab our key
 	if e.key%26 == 0 {
+		// Rotation factor is 0, error is of type ErrKey
 		err = fmt.Errorf("ERROR|caesarEncryptor.Encrypt(%s)|key is %d|no enciphering has taken place|%w", message, e.key, ErrKey)
 	}
 
