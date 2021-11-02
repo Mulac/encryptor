@@ -9,6 +9,8 @@ type Encryptor interface {
 type EncryptorType string
 
 const (
+	// Caesar encryptor rotates letters a-z and A-Z by a given key
+	// wrapping around if necessary.  No other UTF-8 chars are effected.
 	Caesar EncryptorType = "caesar"
 )
 

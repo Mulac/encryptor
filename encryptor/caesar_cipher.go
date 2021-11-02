@@ -6,7 +6,7 @@ import (
 )
 
 func caesarCipherEncryptor() (Encryptor, error) {
-	return &caesarCipher{}, nil
+	return &caesarCipher{EncryptorType: Caesar}, nil
 }
 
 type caesarCipher struct {

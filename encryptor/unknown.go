@@ -4,6 +4,7 @@ import (
 	"fmt"
 )
 
+// unknownEncryptor is used when the Encryptor type given is not recognised
 func unknownEncryptor(eType EncryptorType) (Encryptor, error) {
 	return &unknown{eType}, fmt.Errorf("ERROR|unknownEncryptor()|encryptor type %s not implemented", eType)
 }
