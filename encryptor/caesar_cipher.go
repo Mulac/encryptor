@@ -18,7 +18,7 @@ type caesarCipher struct {
 func (e caesarCipher) Encrypt(message string, opts ...EncryptorOption) (string, error) {
 	e.apply(opts) // Grab our key
 	if e.key%26 == 0 {
-		return "", fmt.Errorf("ERROR|caesarEncryptor.Encrypt(%s)|key is %d|no enciphering has taken place|%w", message, e.key, ErrEncryptorKey)
+		return "", fmt.Errorf("ERROR|caesarEncryptor.Encrypt(%s)|key is %d|no enciphering has taken place|%w", message, e.key, ErrKey)
 	}
 
 	mapping := func(r rune) rune {
@@ -33,7 +33,7 @@ func (e caesarCipher) Encrypt(message string, opts ...EncryptorOption) (string, 
 func (e caesarCipher) Decrypt(message string, opts ...EncryptorOption) (string, error) {
 	e.apply(opts) // Grab our key
 	if e.key%26 == 0 {
-		return "", fmt.Errorf("ERROR|caesarEncryptor.Encrypt(%s)|key is %d|no enciphering has taken place|%w", message, e.key, ErrEncryptorKey)
+		return "", fmt.Errorf("ERROR|caesarEncryptor.Encrypt(%s)|key is %d|no enciphering has taken place|%w", message, e.key, ErrKey)
 	}
 
 	mapping := func(r rune) rune {

@@ -17,6 +17,11 @@ var testData = []struct {
 	{"hello", "khoor", 3},
 	{"hello", "uryyb", 13},
 	{"hELlo", "uRYyb", 13},
+	{
+		"This above all: to thine own self be true.",
+		"Wklv deryh doo: wr wklqh rzq vhoi eh wuxh.",
+		3,
+	},
 }
 
 func TestCaesarCipherEncrypt(t *testing.T) {
