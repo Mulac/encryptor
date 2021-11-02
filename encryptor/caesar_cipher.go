@@ -15,33 +15,33 @@ type caesarCipher struct {
 }
 
 // Value reciever because we don't want our key to persist between calls
-func (e caesarCipher) Encrypt(message string, opts ...EncryptorOption) (string, error) {
+func (e caesarCipher) Encrypt(message string, opts ...EncryptorOption) (encrypted string, err error) {
 	e.apply(opts) // Grab our key
 	if e.key%26 == 0 {
-		return "", fmt.Errorf("ERROR|caesarEncryptor.Encrypt(%s)|key is %d|no enciphering has taken place|%w", message, e.key, ErrKey)
-	}
-
-	mapping := func(r rune) rune {
-		return caesar(r, e.key)
+		err = fmt.Errorf("ERROR|caesarEncryptor.Encrypt(%s)|key is %d|no enciphering has taken place|%w", message, e.key, ErrKey)
 	}
 
 	// TODO(calum): is there a quicker way of doing this?  Use benchmark in _test.go
-	return strings.Map(mapping, message), nil
+	encrypted = strings.Map(func(r rune) rune {
+		return caesar(r, e.key)
+	}, message)
+
+	return
 }
 
 // Value reciever because we don't want our key to persist between calls
-func (e caesarCipher) Decrypt(message string, opts ...EncryptorOption) (string, error) {
+func (e caesarCipher) Decrypt(message string, opts ...EncryptorOption) (decrypted string, err error) {
 	e.apply(opts) // Grab our key
 	if e.key%26 == 0 {
-		return "", fmt.Errorf("ERROR|caesarEncryptor.Encrypt(%s)|key is %d|no enciphering has taken place|%w", message, e.key, ErrKey)
-	}
-
-	mapping := func(r rune) rune {
-		return caesar(r, -e.key)
+		err = fmt.Errorf("ERROR|caesarEncryptor.Encrypt(%s)|key is %d|no enciphering has taken place|%w", message, e.key, ErrKey)
 	}
 
 	// TODO(calum): is there a quicker way of doing this?  Use benchmark in _test.go
-	return strings.Map(mapping, message), nil
+	decrypted = strings.Map(func(r rune) rune {
+		return caesar(r, -e.key)
+	}, message)
+
+	return
 }
 
 // caesar cipher with letters a-z and A-Z
