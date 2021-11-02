@@ -20,7 +20,7 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// The request message containing the user's name.
+// For now we're just dealing with strings
 type Message struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -68,7 +68,7 @@ func (x *Message) GetBody() string {
 	return ""
 }
 
-// The response message containing the greetings
+// Can be extended for more complex encryptions
 type EncryptorRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

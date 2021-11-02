@@ -18,7 +18,6 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type EncryptorClient interface {
-	// Sends a greeting
 	Encrypt(ctx context.Context, in *EncryptorRequest, opts ...grpc.CallOption) (*Message, error)
 	Decrypt(ctx context.Context, in *EncryptorRequest, opts ...grpc.CallOption) (*Message, error)
 }
@@ -53,7 +52,6 @@ func (c *encryptorClient) Decrypt(ctx context.Context, in *EncryptorRequest, opt
 // All implementations must embed UnimplementedEncryptorServer
 // for forward compatibility
 type EncryptorServer interface {
-	// Sends a greeting
 	Encrypt(context.Context, *EncryptorRequest) (*Message, error)
 	Decrypt(context.Context, *EncryptorRequest) (*Message, error)
 	mustEmbedUnimplementedEncryptorServer()
