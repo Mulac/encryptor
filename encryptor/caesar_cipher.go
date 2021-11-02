@@ -1,7 +1,7 @@
 package encryptor
 
 import (
-	"log"
+	"fmt"
 	"strings"
 )
 
@@ -17,8 +17,8 @@ type caesarCipher struct {
 // Value reciever because we don't want our key to persist between calls
 func (e caesarCipher) Encrypt(message string, opts ...EncryptorOption) (string, error) {
 	e.apply(opts) // Grab our key
-	if e.key == 0 {
-		log.Printf("WARN|caesarEncryptor.Encrypt(%s, %d)|key is 0|no enciphering has taken place", message, e.key)
+	if e.key%26 == 0 {
+		return "", fmt.Errorf("ERROR|caesarEncryptor.Encrypt(%s)|key is %d|no enciphering has taken place|%w", message, e.key, ErrEncryptorKey)
 	}
 
 	mapping := func(r rune) rune {
@@ -32,8 +32,8 @@ func (e caesarCipher) Encrypt(message string, opts ...EncryptorOption) (string, 
 // Value reciever because we don't want our key to persist between calls
 func (e caesarCipher) Decrypt(message string, opts ...EncryptorOption) (string, error) {
 	e.apply(opts) // Grab our key
-	if e.key == 0 {
-		log.Printf("WARN|caesarEncryptor.Encrypt(%s, %d)|key is 0|no enciphering has taken place", message, e.key)
+	if e.key%26 == 0 {
+		return "", fmt.Errorf("ERROR|caesarEncryptor.Encrypt(%s)|key is %d|no enciphering has taken place|%w", message, e.key, ErrEncryptorKey)
 	}
 
 	mapping := func(r rune) rune {
